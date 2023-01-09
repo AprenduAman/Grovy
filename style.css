@@ -1,0 +1,574 @@
+@font-face {
+    font-family: "hello";
+    src: url("./Hello.ttf");
+}
+
+* {
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    background-image: url(./img/background/bg.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Poppins' , sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player{
+    height: 90%;
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+
+   
+}
+
+.player .div2 .title{
+    color: cyan;
+    font-family: hello;
+    font-size: 80px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.div1{
+    background-color: rgba(255, 255, 255, 0.125);
+    width: 25%;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 20px;
+    
+    backdrop-filter: blur(2px) saturate(180%);
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(239, 207, 207, 0.125);
+}
+
+.div1 .search{
+    background-color: rgba(50, 75, 232, 0.125);
+    padding: 10px;
+    border-radius: 20px;
+    color: #808080;
+}
+
+.div1 .search input{
+    background-color: transparent;
+    width: 320px;
+    height: 20px;
+    border: none;
+    outline: none;
+    color: white;
+    padding-left: 10px;
+}
+
+.div2{
+    background-color: rgba(86, 239, 83, 0.125);
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 20px;
+
+    backdrop-filter: blur(2px) saturate(180%);
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(239, 207, 207, 0.125);
+}
+
+#albumCover{
+    background-color: transparent;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode: color;
+    border-radius: 10px;
+    opacity: 0.75;
+    box-shadow: 10px 10px 100px black,
+                -10px -10px 100px black,
+                10px 10px 100px black inset,
+                10px 10px 100px black inset;
+    height: 500px;
+    width: 400px;
+    margin: 30px 0px 0px 0px;
+}
+
+.playlist {
+    margin: 20px 0px 0px 10px;
+}
+
+.playlist h4 {
+    font-size: 14px;
+    font-weight: 400;
+    padding-bottom: 10px;
+    color: #4c5262;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: .3s linear;
+}
+.playlist h4:hover {
+    color: rgb(255, 255, 255);
+}
+.playlist h4 span{
+    position: relative;
+    margin-right: 35px;
+}
+.playlist h4 span::before{
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border: 2px solid #4c5262;
+    border-radius: 50%;
+    top: -4px;
+    transition: .3s linear;
+}
+.playlist h4:hover span::before{
+    border: 2px solid #fff;
+}
+.playlist h4 .bi{
+    display: none;
+}
+.playlist .active{
+    color: cyan;
+}
+.playlist .active span{
+    display: none;
+}
+.playlist .active .bi{
+    display: flex;
+    margin-right: 20px;
+}
+
+.menu_song {
+    width: 100%;
+    height: 84%;
+    overflow: auto;
+    padding: 10px;
+}
+.menu_song li{
+    position: relative;
+    list-style-type: none;
+    padding: 5px 0px 5px 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: .3s linear;
+}
+.menu_song li:hover{
+    background: rgba(128, 128, 188, 0.1);
+    border-radius: 15px;
+}
+.menu_song li span{
+    font-size: 12px;
+    font-weight: 600;
+    color: #4c5262;
+}
+.menu_song li img{
+    width: 32px;
+    height: 32px;
+    margin-left: 25px;
+    border-radius: 5px;
+}
+.menu_song li h5{
+    font-size: 14px;
+    margin-left: 15px;
+    color: white;
+    padding-right: 40px;
+    text-transform: capitalize;
+}
+.menu_song li h5 span{
+    overflow-x: hidden;
+}
+.menu_song li h5 .subtitle{
+    font-size: 10px;
+    color: #565d6e;
+}
+.menu_song li .bi{
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 16px;
+    color: #fff;
+}
+
+/* Scroll Cutomization */
+::-webkit-scrollbar {
+    width: 3px;
+  }
+::-webkit-scrollbar-track {
+    background: rgba(128, 128, 188, 0.1); 
+}
+::-webkit-scrollbar-thumb {
+    background: cyan; 
+    border-radius: 30px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(255, 255, 255); 
+}
+
+/* Volume Slider */
+.slider_container {
+    width: 75%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+  }
+   
+  /* Modify the appearance of the slider */
+  .volume_slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 5px;
+    background: #16e9df;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 10px;
+  }
+
+  .volume_slider:active{
+    border: none;
+  }
+   
+  /* Modify the appearance of the slider thumb */
+  .volume_slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: white;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+   
+  /* Change the opacity when mouse is hovered */
+  .volume_slider:hover {
+    opacity: 1.0;
+  }
+   
+  .volume_slider {
+    width: 50%;
+  }
+   
+  i.fa-volume-down,
+  i.fa-volume-up {
+    color: white;
+    padding: 10px;
+  }
+
+
+.div3{
+    width: 25%;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 20px;
+
+    backdrop-filter: blur(2px) saturate(180%);
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(239, 207, 207, 0.125);
+    text-align: center;
+}
+
+.browseAll{
+    color: white;
+    margin: 20px 0px;
+}
+
+.favArtist{
+    color: white;
+    margin: 10px 0px;
+}
+
+.genres{
+    margin: 20px 0px;
+}
+
+.genre{
+    height: 80px;
+    width: 160px;
+    margin: 3px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 900;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+}
+
+.genre:hover{
+    box-shadow: 1px 1px 3px rgb(255, 255, 255),
+                -1px -1px 3px rgb(255, 255, 255);
+}
+
+.hindi{
+    background-color: lightskyblue;
+}
+
+.english{
+    background-color: greenyellow;
+}
+
+.pop{
+    background-color: goldenrod;
+}
+
+.kpop{
+    background-color: rgb(157, 0, 255);
+}
+
+.romance{
+    background-color: orangered;
+}
+
+.bands{
+    background-color: navy;
+}
+
+.favArtistButtons .genre{
+    height: 100px;
+    width: 160px;
+    margin: 3px;
+    border-radius: 5px;
+    color: white;
+    font-weight: 900;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.favArtistButtons .genre:hover{
+    box-shadow: 1px 1px 3px rgb(255, 255, 255),
+                -1px -1px 3px rgb(255, 255, 255);
+}
+
+.bts{
+    background-image: url(./artists/bts.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: rgb(157, 0, 255);
+}
+
+.oneDirection{
+    background-image: url(./artists/oned.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.taylorSwift{
+    background-image: url(./artists/taylorSwift.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.oliviaRodrigo{
+    background-image: url(./artists/oliviaRodrigo.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.zaynMalik{
+    background-image: url(./artists/zayn2.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.alanWalker{
+    background-image: url(./artists/alanWalker.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.music-container {
+    background-color: rgba(19, 36, 53, 0.4);
+    display: flex;
+    padding: 20px 30px;
+    position: relative;
+    margin: 80px 0px 20px 0px;
+    z-index: 10;
+    width: 100%;
+    border-radius: 20px;
+  }
+  
+  .img-container {
+    position: relative;
+    width: 110px;
+  }
+  
+  /* styling the image to look like a disc by placing a small circle in it*/
+  .img-container::after {
+    content: '';
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    width: 20px;
+    height: 20px;
+    transform: translate(-50%, 50%);
+  }
+  
+  /* using animation to make the image rotate continiously when music is playing */
+  .img-container img {
+    border-radius: 50%;
+    object-fit: cover;
+    height: 110px;
+    width: inherit;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: rotate 3s linear infinite;
+    animation-play-state: paused;
+  }
+  
+  /* making sure the image rotates only when the music is playing */
+  .music-container.play .img-container img {
+    animation-play-state: running;
+  }
+  
+  /* creating the animation keyframe and setting the image to rotate 360 degrees continiously */
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+  
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  
+  .navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    margin: 0px 0px 0px 170px;
+  }
+  
+  /* styling the navigation buttons */
+  .action-btn {
+    border: 0;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 10px;
+    margin: 0 20px;
+  }
+  
+  .action-btn.action-btn-big {
+    font-size: 30px;
+    outline: none;
+  }
+  
+  .action-btn:focus {
+    outline: 0;
+  }
+  
+  /* styling the music-info div by placing it under the music container */
+  .music-info {
+    background-color: #ffffff80;
+    border-radius: 15px;
+    position: absolute;
+    top: 0;
+    left: 150px;
+    width: 60%;
+    margin: -5px;
+    padding: 10px 10px 10px 10px;
+    opacity: 0;
+    transform: translateY(0%);
+    transition: transform 0.3s ease-in, opacity 0.3s ease-in;
+    z-index: 0;
+  }
+  
+  /* making the music info pop up when the music playing using the transform property*/
+  .music-container.play .music-info {
+    opacity: 1;
+    transform: translateY(-100%);
+  }
+  
+  .music-info h4 {
+    margin: 0;
+    text-align: center;
+    text-transform: capitalize;
+  }
+  
+  /* styling the song progress container */
+  .progress-container {
+    background: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0;
+    height: 4px;
+    width: 100%;
+  }
+  
+  /* styling the actual progress bar and making it flow along with the song*/
+  .progress {
+    background-color: cyan;
+    border-radius: 5px;
+    height: 100%;
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+  
+/* search box */
+  .dropdown {
+    position: relative;
+    display: inline-block;
+   
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 330px;
+    margin: 12px 10px;
+    overflow: auto;
+    z-index: 1;
+
+    backdrop-filter: blur(2px) saturate(180%);
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+  }
+  
+  .dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown a:hover {
+    background-color: #ddd;
+}
+  
+  .show {display: block;}
